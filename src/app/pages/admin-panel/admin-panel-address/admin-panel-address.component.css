@@ -1,0 +1,24 @@
+.mat-column-id {
+  width: 32px;
+  border-right: 1px solid currentColor;
+  padding-right: 24px;
+  text-align: center;
+}
+
+a:hover {
+  cursor:pointer;
+}
+th.mat-sort-header-sorted {
+  color: black;
+}
+
+input.normal{
+  width: 85px;
+}
+input.long{
+  width: 220px;
+}
+
+input.short{
+  width: 40px;
+}

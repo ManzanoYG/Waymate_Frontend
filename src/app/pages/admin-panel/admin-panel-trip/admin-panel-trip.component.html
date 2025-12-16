@@ -1,0 +1,126 @@
+<div class="row">
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)">
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> id </th>
+        <td mat-cell *matCellDef="let trip"> {{trip.id}} </td>
+      </ng-container>
+      <ng-container matColumnDef="idDriver">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Driver </th>
+        <td mat-cell *matCellDef="let trip">
+          <ng-container>{{trip.idDriver}}</ng-container>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="smoke">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header><i class="fa-solid fa-smoking"></i></th>
+        <td mat-cell *matCellDef="let trip">
+          <ng-container *ngIf="!trip.editMode; else editMode">{{trip.smoke}}</ng-container>
+          <ng-template #editMode>
+            <select name="smoke" class="short" [(ngModel)]="trip.smoke">
+              <option value="true">true</option>
+              <option value="false">false</option>
+            </select>
+          </ng-template>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="price">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header><i class="fa-regular fa-money-bill-1"></i></th>
+        <td mat-cell *matCellDef="let trip">
+          <ng-container *ngIf="!trip.editMode; else editMode">{{trip.price}}</ng-container>
+          <ng-template #editMode><input  type="text" class="short" [(ngModel)]="trip.price"></ng-template>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="luggage">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header><i class="fa-solid fa-person-walking-luggage"></i></th>
+        <td mat-cell *matCellDef="let trip">
+          <ng-container *ngIf="!trip.editMode; else editMode">{{trip.luggage}}</ng-container>
+          <ng-template #editMode>
+            <select name="luggage" class="short" [(ngModel)]="trip.luggage">
+              <option value="true">true</option>
+              <option value="false">false</option>
+            </select>
+          </ng-template>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="petFriendly">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header><i class="fa-solid fa-paw"></i></th>
+        <td mat-cell *matCellDef="let trip">
+          <ng-container *ngIf="!trip.editMode; else editMode">{{trip.petFriendly}}</ng-container>
+          <ng-template #editMode>
+            <select name="petFriendly" class="short" [(ngModel)]="trip.petFriendly">
+              <option value="true">true</option>
+              <option value="false">false</option>
+            </select>
+          </ng-template>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="date">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header><i class="fa-solid fa-calendar-days"></i></th>
+        <td mat-cell *matCellDef="let trip">
+          <ng-container *ngIf="!trip.editMode; else editMode">{{trip.date | date: 'dd/MM/yyyy'}}</ng-container>
+          <ng-template #editMode><input  type="date" class="long" [(ngModel)]="trip.date"></ng-template>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="driverMessage">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header><i class="fa-solid fa-message"></i></th>
+        <td mat-cell *matCellDef="let trip">
+          <ng-container *ngIf="!trip.editMode; else editMode">{{trip.driverMessage}}</ng-container>
+          <ng-template #editMode><textarea [(ngModel)]="trip.driverMessage"></textarea></ng-template>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="airConditioning">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header><i class="fa-solid fa-fan"></i></th>
+        <td mat-cell *matCellDef="let trip">
+          <ng-container *ngIf="!trip.editMode; else editMode">{{trip.airConditioning}}</ng-container>
+          <ng-template #editMode>
+            <select name="airConditioning" class="short" [(ngModel)]="trip.airConditioning">
+              <option value="{{true}}">true</option>
+              <option value="{{false}}">false</option>
+            </select>
+          </ng-template>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="idStartingPoint">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Departure</th>
+        <td mat-cell *matCellDef="let trip">
+          <ng-container *ngIf="!trip.editMode; else editMode">{{trip.idStartingPoint}}</ng-container>
+          <ng-template #editMode><input  type="text" class="short" [(ngModel)]="trip.idStartingPoint"></ng-template>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="idDestination">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Destination</th>
+        <td mat-cell *matCellDef="let trip">
+          <ng-container *ngIf="!trip.editMode; else editMode">{{trip.idDestination}}</ng-container>
+          <ng-template #editMode><input  type="text" class="short" [(ngModel)]="trip.idDestination"></ng-template>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="edit">
+        <th mat-header-cell *matHeaderCellDef><i class="fa-solid fa-pen"></i></th>
+        <td mat-cell *matCellDef="let trip">
+          <ng-container *ngIf="!trip.editMode; else editMode">
+            <a (click)="enableEditMode(trip)">
+              <i class="fa-solid fa-pen"></i>
+            </a>
+          </ng-container>
+          <ng-template #editMode>
+            <a (click)="disableEditMode(trip)">
+              <i class="fa-solid fa-check"></i>
+            </a>
+          </ng-template>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page"></mat-paginator>
+  </div>
+</div>

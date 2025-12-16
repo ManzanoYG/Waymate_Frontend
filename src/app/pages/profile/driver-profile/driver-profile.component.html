@@ -1,0 +1,302 @@
+<div *ngIf="_driver && _address && _car" class="container emp-profile" >
+  <form [formGroup]="form" (submit)="onSubmit()">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="profile-img">
+          <img [src]="ImagePath" height="50" class="image-right" alt="AdminIcon"/>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="profile-head">
+          <h3>{{_driver.username}}</h3>
+          <h5>{{_driver.userType}}</h5>
+          <p class="profile-rating">RANKINGS : <span>8/10</span></p>
+          <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+              <p class="nav-link active" id="home-tab" data-toggle="tab" role="tab" aria-controls="home"
+                 aria-selected="true">About</p>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-2" *ngIf="!editMode">
+        <button type="button" class="profile-edit-btn" name="btnAddMore" (click)="EnterEditMode()">Edit Profile</button>
+      </div>
+      <div class="col-md-2" *ngIf="editMode">
+        <button type="button" class="profile-edit-btn" name="btnAddMore" (click)="QuitEditMode()">Cancel</button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4"></div>
+      <div class="col-md-8">
+        <div class="tab-content profile-tab" id="myTabContent">
+          <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+            <div formGroupName="passengerForm">
+              <div class="row" *ngIf="editMode">
+                <div class="col-md-4">
+                  <label>Username</label>
+                </div>
+                <div class="col-md-4" *ngIf="editMode">
+                  <input class="form-control form-control-sm" type="text" name="username" formControlName="username">
+                  <span *ngIf="errorUsername" class="invalid">This username is already used.</span>
+                  <span *ngIf="!controlUsername()" class="invalid">The username is invalid. Use only letters, numbers, hyphens (-) and underscores (_).</span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4">
+                  <label>Lastname</label>
+                </div>
+                <div class="col-md-6" *ngIf="!editMode">
+                  <p>{{_driver.lastname}}</p>
+                </div>
+                <div class="col-md-4" *ngIf="editMode">
+                  <input class="form-control form-control-sm" type="text" name="username" formControlName="lastname">
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4">
+                  <label>Firstname</label>
+                </div>
+                <div class="col-md-5" *ngIf="!editMode">
+                  <p>{{_driver.firstname}}</p>
+                </div>
+                <div class="col-md-4" *ngIf="editMode">
+                  <input class="form-control form-control-sm" type="text" name="phone" formControlName="firstname">
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4">
+                  <label>Birthdate</label>
+                </div>
+                <div class="col-md-6" *ngIf="!editMode">
+                  <p>{{_driver.birthdate | date: 'dd/MM/yyyy'}}</p>
+                </div>
+                <div class="col-md-4" *ngIf="editMode">
+                  <input class="form-control form-control-sm" type="date" name="birthDate" formControlName="birthDate">
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4">
+                  <label>Email</label>
+                </div>
+                <div class="col-md-6" *ngIf="!editMode">
+                  <p>{{_driver.email}}</p>
+                </div>
+                <div class="col-md-4" *ngIf="editMode">
+                  <input class="form-control form-control-sm" type="text" name="email" formControlName="email">
+                  <span *ngIf="errorMail" class="invalid">This email address is already in use.</span>
+                  <span *ngIf="!controlEmail()" class="invalid">The email address is invalid.</span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4">
+                  <label>Phone</label>
+                </div>
+                <div class="col-md-5" *ngIf="!editMode">
+                  <p>{{_driver.phoneNumber}}</p>
+                </div>
+                <div class="col-md-4" *ngIf="editMode">
+                  <input class="form-control form-control-sm" type="tel" name="phone" formControlName="phone">
+                </div>
+              </div>
+              <div class="row mb-4">
+                <div class="col-md-4">
+                  <label>Gender</label>
+                </div>
+                <div class="col-md-5" *ngIf="!editMode">
+                  <p>{{_driver.gender}}</p>
+                </div>
+                <div class="col-md-4" *ngIf="editMode">
+                  <select name="gender" class="form-control-sm" formControlName="gender">
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4 mb-2">
+                <label><u>Address</u></label>
+              </div>
+            </div>
+            <div formGroupName="addressForm">
+              <div class="row">
+                <div class="col-md-4">
+                  <label>Street</label>
+                </div>
+                <div class="col-md-5" *ngIf="!editMode">
+                  <p>{{_address.street}}</p>
+                </div>
+                <div class="col-md-4" *ngIf="editMode">
+                  <input class="form-control form-control-sm" type="text" name="street" formControlName="street">
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4">
+                  <label>Number</label>
+                </div>
+                <div class="col-md-5" *ngIf="!editMode">
+                  <p>{{_address.number}}</p>
+                </div>
+                <div class="col-md-4" *ngIf="editMode">
+                  <input class="form-control form-control-sm" type="text" name="number" formControlName="number">
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4">
+                  <label>PostalCode</label>
+                </div>
+                <div class="col-md-5" *ngIf="!editMode">
+                  <p>{{_address.postalCode}}</p>
+                </div>
+                <div class="col-md-4" *ngIf="editMode">
+                  <input class="form-control form-control-sm" type="text" name="postalCode" formControlName="postalCode">
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4">
+                  <label>City</label>
+                </div>
+                <div class="col-md-5" *ngIf="!editMode">
+                  <p>{{_address.city}}</p>
+                </div>
+                <div class="col-md-4" *ngIf="editMode">
+                  <input class="form-control form-control-sm" type="text" name="city" formControlName="city">
+                </div>
+              </div>
+              <div class="row mb-4">
+                <div class="col-md-4">
+                  <label>Country</label>
+                </div>
+                <div class="col-md-5" *ngIf="!editMode">
+                  <p>{{_address.country}}</p>
+                </div>
+                <div class="col-md-4" *ngIf="editMode">
+                  <input class="form-control form-control-sm" type="text" name="country" formControlName="country">
+                </div>
+              </div>
+            </div>
+            <div formGroupName="carForm">
+              <div class="row">
+                <div class="col-md-4 mb-2">
+                  <label><u>Car</u></label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4">
+                  <label>NumberPlate</label>
+                </div>
+                <div class="col-md-5" >
+                  <p>{{_car.numberPlate}}</p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4">
+                  <label>Brand</label>
+                </div>
+                <div class="col-md-5" *ngIf="!editMode">
+                  <p>{{_car.brand}}</p>
+                </div>
+                <div class="col-md-4" *ngIf="editMode">
+                  <input class="form-control form-control-sm" type="text" name="brand" formControlName="brand">
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4">
+                  <label>Model</label>
+                </div>
+                <div class="col-md-5" *ngIf="!editMode">
+                  <p>{{_car.model}}</p>
+                </div>
+                <div class="col-md-4" *ngIf="editMode">
+                  <input class="form-control form-control-sm" type="text" name="model" formControlName="model">
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4">
+                  <label>Number of seats</label>
+                </div>
+                <div class="col-md-5" *ngIf="!editMode">
+                  <p>{{_car.nbSeats}}</p>
+                </div>
+                <div class="col-md-4" *ngIf="editMode">
+                  <input class="form-control form-control-sm" type="number" name="nbSeats" formControlName="nbSeats">
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4">
+                  <label>Car type</label>
+                </div>
+                <div class="col-md-5" *ngIf="!editMode">
+                  <p>{{_car.carType}}</p>
+                </div>
+                <div class="col-md-4" *ngIf="editMode">
+                  <select name="carType" class="form-control-sm" formControlName="carType">
+                    <option value="0">Micro</option>
+                    <option value="1">Sedan</option>
+                    <option value="2">Hatchback</option>
+                    <option value="3">Universal</option>
+                    <option value="4">Liftback</option>
+                    <option value="5">Coupe</option>
+                    <option value="6">Cabriolet</option>
+                    <option value="7">Roadster</option>
+                    <option value="8">Targa</option>
+                    <option value="9">Limousine</option>
+                    <option value="10">MuscleCar</option>
+                    <option value="11">SportCar</option>
+                    <option value="12">SuperCar</option>
+                    <option value="13">Suv</option>
+                    <option value="14">Crossover</option>
+                    <option value="15">Pickup</option>
+                    <option value="16">Van</option>
+                    <option value="17">Minivan</option>
+                    <option value="18">Minibus</option>
+                    <option value="19">Bus</option>
+                    <option value="20">Campervan</option>
+                  </select>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4">
+                  <label>Fuel type</label>
+                </div>
+                <div class="col-md-5" *ngIf="!editMode">
+                  <p>{{_car.fuelType}}</p>
+                </div>
+                <div class="col-md-4" *ngIf="editMode">
+                  <select name="fuelType" class="form-control-sm" formControlName="fuelType">
+                    <option value="0">Electric</option>
+                    <option value="1">Diesel</option>
+                    <option value="2">Gasoline</option>
+                    <option value="3">Hybrid</option>
+                    <option value="4">Lpg</option>
+                    <option value="5">Other</option>
+                  </select>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4">
+                  <label>Color</label>
+                </div>
+                <div class="col-md-5" *ngIf="!editMode">
+                  <p>{{_car.color}}</p>
+                </div>
+                <div class="col-md-4" *ngIf="editMode">
+                  <input class="form-control form-control-sm" type="text" name="color" formControlName="color">
+                </div>
+              </div>
+            </div>
+            <br><br>
+            <div class="row" *ngIf="editMode">
+              <div class="col-md-4"></div>
+              <div class="col-md-4">
+                <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Save" [disabled]="form.invalid">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

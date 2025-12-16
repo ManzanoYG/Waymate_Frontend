@@ -1,0 +1,89 @@
+<div class="container py-3 h-100">
+  <div class="row">
+    <form class="centered-form" [formGroup]="form" (submit)="formSubmit()">
+      <div class="row align-items-center g-3">
+        <div class="col-3">
+          <input class="form-control" type="text" name="destinationHomePage" formControlName="depart" placeholder="◉ Depart"/>
+        </div>
+        <div class="col-3">
+          <input class="form-control" type="text" name="destinationHomePage" formControlName="destination" placeholder="◉ Destination"/>
+        </div>
+        <div class="col-3">
+          <input class="form-control" type="date" name="destinationHomePage" formControlName="date" [min]="minDate"/>
+        </div>
+        <div class="col-2">
+          <input class="form-control" type="text" name="destinationHomePage" formControlName="people" placeholder="🚹 People"/>
+        </div>
+        <div class="col">
+          <button type="submit" class="btn btn-primary">Search</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<div *ngIf="formData" class="gradient-custom-2">
+  <div *ngFor="let filteredTrip of filteredTrips" class="container py-3 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-lg-6">
+        <div class="card card-margin">
+          <a (click)="navigateToTripDetails(filteredTrip.trip.id)">
+            <div class="card-header no-border">
+              <h5 class="card-title">{{filteredTrip.departureAddress.city}} - {{filteredTrip.destinationAddress.city}} | {{filteredTrip.destinationAddress.country}}</h5>
+            </div>
+            <div class="card-body pt-0">
+              <div class="widget-49">
+                <div class="widget-49-title-wrapper">
+                  <div class="widget-49-date-primary">
+                    <span class="widget-49-date-day">{{filteredTrip.trip.date | date : "dd"}}</span>
+                    <span class="widget-49-date-month">{{filteredTrip.trip.date | date : "MMM"}}</span>
+                  </div>
+                  <div class="widget-49-meeting-info">
+                    <span class="widget-49-pro-title">{{filteredTrip.driver.firstName}} {{filteredTrip.driver.lastName}}</span>
+                    <span class="widget-49-meeting-time">{{filteredTrip.trip.date | date : "hh:mm"}}</span>
+                  </div>
+                </div>
+                <ol class="widget-49-meeting-points">
+                  <li *ngIf="filteredTrip.trip.smoke" class="widget-49-meeting-item"><span>You can smoke</span></li>
+                  <li *ngIf="!filteredTrip.trip.smoke" class="widget-49-meeting-item"><span>You can't smoke</span></li>
+                  <li *ngIf="filteredTrip.trip.luggage" class="widget-49-meeting-item"><span>You can get luggage with you</span></li>
+                  <li *ngIf="!filteredTrip.trip.luggage" class="widget-49-meeting-item"><span>You can't get luggage with you</span></li>
+                  <li *ngIf="filteredTrip.trip.petFriendly" class="widget-49-meeting-item"><span>You can get pet with you</span></li>
+                  <li *ngIf="!filteredTrip.trip.petFriendly" class="widget-49-meeting-item"><span>You can't get pet with you</span></li>
+                </ol>
+                <div class="widget-49-meeting-action">
+                  <span class="btn-sm btn-flash-border-primary">{{filteredTrip.trip.price}} €</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div  class="container py-5 h-100">
+    <div   class="row d-flex justify-content-center align-items-center h-100">
+      <div  class="col-auto">
+        <div *ngIf="filteredTrips.length == 0" class="col-auto">
+          <div class="card card-registration card-registration-2" style="border-radius: 15px;">
+            <div class="p-5">
+              <p>No matching trips found.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="!formData" class="gradient-custom-2">
+  <div class="container py-5 h-100">
+    <div  class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-auto">
+        <div class="card card-registration card-registration-2" style="border-radius: 15px;">
+          <div class="p-5">
+            Home Page form not send.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,129 @@
+<div *ngIf="trip && addressDepart && addressDestination && driver && car" class="gradient-custom-2">
+  <div class="container py-3 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-lg-4">
+        <div class="card card-margin">
+          <div class="card-header no-border">
+            <h5 class="card-title">Trip details</h5>
+          </div>
+          <div class="card-body pt-0">
+            <div class="widget-49">
+              <div class="widget-49-title-wrapper">
+                <div class="widget-49-date-primary">
+                  <span class="widget-49-date-day">{{trip.date | date:"dd"}}</span>
+                  <span class="widget-49-date-month">{{trip.date | date:"MMM"}}</span>
+                </div>
+                <div class="widget-49-meeting-info">
+                  <span class="widget-49-pro-title"><i class="fa-solid fa-car"></i> {{addressDepart.city}} <i class="fa-solid fa-arrow-right"></i> {{addressDestination.city}}</span>
+                  <span class="widget-49-meeting-time"><i class="fa-solid fa-car"></i> {{trip.date | date:"hh:mm"}} | {{addressDepart.country}}</span>
+                </div>
+              </div>
+              <ol class="widget-49-meeting-points">
+                <li class="widget-49-meeting-item"><span>You can smoke</span></li>
+                <li class="widget-49-meeting-item"><span>You can get luggage with you</span></li>
+                <li class="widget-49-meeting-item"><span>You can get pet with you</span></li>
+              </ol>
+              <div class="widget-49-meeting-action">
+                <span class="btn-sm btn-flash-border-primary">{{trip.price}} €</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="card card-margin">
+          <div class="card-header no-border">
+            <h5 class="card-title">Driver information</h5>
+          </div>
+          <div class="card-body pt-0">
+            <div class="widget-49">
+              <div class="widget-49-title-wrapper">
+                <div class="widget-49-date-primary">
+                  <span class="widget-49-date-day"><i class="fa-regular fa-user"></i></span>
+                </div>
+                <div class="widget-49-meeting-info">
+                  <span class="widget-49-pro-title">{{driver.firstName}} {{driver.lastName}}</span>
+                  <span class="widget-49-meeting-time">{{driver.email}}</span>
+                </div>
+              </div>
+              <ol class="widget-49-meeting-points">
+                <li class="widget-49-meeting-item"><span><i class="fa-solid fa-phone"></i> {{driver.phoneNumber}}</span></li>
+                <li class="widget-49-meeting-item"><span><i class="fa-solid fa-cake-candles"></i> {{driver.birthdate | date:"yyyy-MM-dd"}}</span></li>
+                <li class="widget-49-meeting-item"><span><i class="fa-solid fa-genderless"></i> {{driver.gender}}</span></li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="card card-margin">
+          <div class="card-header no-border">
+            <h5 class="card-title">Car information</h5>
+          </div>
+          <div class="card-body pt-0">
+            <div class="widget-49">
+              <div class="widget-49-title-wrapper">
+                <div class="widget-49-date-primary">
+                  <span class="widget-49-date-day"><i class="fa-solid fa-car"></i></span>
+                </div>
+                <div class="widget-49-meeting-info">
+                  <span class="widget-49-pro-title">{{car.brand}} : {{car.numberPlate}}</span>
+                  <span class="widget-49-meeting-time">{{car.model}}</span>
+                </div>
+              </div>
+              <ol class="widget-49-meeting-points">
+                <li class="widget-49-meeting-item"><span><i class="fa-solid fa-chair"></i> {{car.nbSeats}}</span></li>
+                <li class="widget-49-meeting-item"><span><i class="fa-solid fa-leaf"></i> {{car.fuelType}}</span></li>
+                <li class="widget-49-meeting-item"><span><i class="fa-solid fa-car-side"></i> {{car.carType}}</span></li>
+                <li class="widget-49-meeting-item"><span><i class="fa-solid fa-brush"></i> {{car.color}}</span></li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-lg-12">
+        <div class="card card-margin">
+          <div class="card-header no-border">
+            <h5 class="card-title">More information</h5>
+          </div>
+          <div class="card-body pt-0">
+            <div class="widget-49">
+              <div class="widget-49-title-wrapper">
+                <div class="widget-49-date-primary">
+                  <span class="widget-49-date-day"><i class="fa-solid fa-message"></i></span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-9 mb-3 pb-2">
+                    <span *ngIf="trip.driverMessage" class="widget-49-pro-title">Message from {{driver.firstName}} {{driver.lastName}} : {{trip.driverMessage}}</span>
+                    <span *ngIf="!trip.driverMessage" class="widget-49-pro-title">Message from {{driver.firstName}} {{driver.lastName}} : nothing</span>
+                </div>
+                <div class="col-md-3 mb-3 pb-2">
+                  <div class="d-flex justify-content-center">
+                    <input class="btn btn-light btn-lg" type="button" value="Contact {{driver.firstName}}">
+                  </div>
+                </div>
+              </div>
+              <hr class="hr" />
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="d-flex justify-content-center">
+                    <p>
+                      Your reservation will be confirmed instantly
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <hr class="hr" />
+              <div class="d-flex justify-content-center">
+                <input class="btn btn-light btn-lg" type="button" value="Book a trip with {{driver.firstName}}" (click)="confirmBooking()">
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+    </div>
+</div>
+</div>

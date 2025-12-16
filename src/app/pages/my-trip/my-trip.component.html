@@ -1,0 +1,39 @@
+<div class="container py-3 h-100">
+  <table *ngIf="filteredTrips.length > 0" class="table table-hover mb-5">
+    <thead>
+    <tr>
+      <th>#</th>
+      <th>Date</th>
+      <th>Departure</th>
+      <th>Destination</th>
+      <th>Country</th>
+      <th>Details/Modify</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let trips of filteredTrips; let i = index;">
+      <td>{{i+1}}</td>
+      <td>{{ trips.trip.date | date:'dd/MM/yyyy' }}</td>
+      <td>{{ trips.departureAddress.city }}</td>
+      <td>{{ trips.destinationAddress.city }}</td>
+      <td>{{ trips.departureAddress.country }}</td>
+      <td>
+        <button class="btn btn-primary" (click)="modifyTrips(trips.trip.id)">Trip details/modify</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <div *ngIf="filteredTrips.length === 0" class="container py-5 h-100">
+    <div   class="row d-flex justify-content-center align-items-center h-100">
+      <div  class="col-auto">
+        <div *ngIf="filteredTrips.length == 0" class="col-auto">
+          <div class="card card-registration card-registration-2" style="border-radius: 15px;">
+            <div class="p-5">
+              <p>You have not created any trips</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,55 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" routerLink="home" routerLinkActive="active">
+      <img [src] ="ImagePath" height="50" class="d-inline-block align-top" alt="waymate">
+    </a>
+    <button
+      class="navbar-toggler hidden-sm-up"
+      type="button"
+      aria-controls="navbarContent"
+      [attr.aria-expanded]="!collapsed"
+      aria-label="Toggle navigation"
+      (click)="collapsed = !collapsed"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div [class.collapse]="collapsed" class="collapse navbar-collapse" id="navbarsDefault">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" routerLink="home" routerLinkActive="active">Home</a>
+        </li>
+        <li *ngIf="driver" class="nav-item">
+          <a class="nav-link" routerLink="createTrip" routerLinkActive="active">Create Trip</a>
+        </li>
+        <li *ngIf="driver" class="nav-item">
+          <a class="nav-link" routerLink="myTrip" routerLinkActive="active">My Trip</a>
+        </li>
+        <li *ngIf="passenger || driver" class="nav-item">
+          <a class="nav-link" routerLink="myBooking" routerLinkActive="active">My Booking</a>
+        </li>
+        <li *ngIf="admin" class="nav-item">
+          <a class="nav-link" routerLink="adminPanel" routerLinkActive="active">Admin Panel</a>
+        </li>
+      </ul>
+    </div>
+    <div class="navbar-collapse" [class.collapse]="collapsed" id="navbarContent">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item icon-nav" ngbDropdown display="dynamic" placement="bottom-left">
+          <a class="nav-link" tabindex="0" ngbDropdownToggle id="navbarDropdown3" role="button" (click)="displayLogout()">
+            <svg class="svg-icon" viewBox="0 0 20 20">
+              <path d="M12.075,10.812c1.358-0.853,2.242-2.507,2.242-4.037c0-2.181-1.795-4.618-4.198-4.618S5.921,4.594,5.921,6.775c0,1.53,0.884,3.185,2.242,4.037c-3.222,0.865-5.6,3.807-5.6,7.298c0,0.23,0.189,0.42,0.42,0.42h14.273c0.23,0,0.42-0.189,0.42-0.42C17.676,14.619,15.297,11.677,12.075,10.812 M6.761,6.775c0-2.162,1.773-3.778,3.358-3.778s3.359,1.616,3.359,3.778c0,2.162-1.774,3.778-3.359,3.778S6.761,8.937,6.761,6.775 M3.415,17.69c0.218-3.51,3.142-6.297,6.704-6.297c3.562,0,6.486,2.787,6.705,6.297H3.415z"></path>
+            </svg>
+          </a>
+          <span *ngIf="username!=''" class="text-white">Connected as : {{username}}</span>
+          <span *ngIf="username==''" class="text-white">You are not connected.</span>
+          <div ngbDropdownMenu aria-labelledby="navbarDropdown3" class="dropdown-menu">
+            <a *ngIf="!isConnected" routerLink="registration" class="dropdown-item" routerLinkActive="active">Sign Up</a>
+            <a *ngIf="!isConnected" routerLink="connection" class="dropdown-item" routerLinkActive="active">Log in</a>
+            <a *ngIf="isConnected" routerLink="profile" class="dropdown-item" routerLinkActive="active">Profile</a>
+            <a *ngIf="isConnected" class="dropdown-item" (click)="logout()">Logout</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,120 @@
+  <div class="row">
+    <div class="mat-elevation-z8">
+      <table mat-table [dataSource]="dataSource"  matSort (matSortChange)="announceSortChange($event)">
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> id </th>
+          <td mat-cell *matCellDef="let user"> {{user.id}} </td>
+        </ng-container>
+        <ng-container matColumnDef="userType">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Type </th>
+          <td mat-cell *matCellDef="let user"> {{user.userType}} </td>
+        </ng-container>
+        <ng-container matColumnDef="username">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Username </th>
+          <td mat-cell *matCellDef="let user">
+            <ng-container *ngIf="!user.editMode; else editMode">{{user.username}}</ng-container>
+            <ng-template #editMode><input type="text" class="normal" [(ngModel)]="user.username"></ng-template>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="lastName">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> lastName </th>
+          <td mat-cell *matCellDef="let user">
+            <ng-container *ngIf="!user.editMode; else editMode">{{user.lastName}}</ng-container>
+            <ng-template #editMode><input *ngIf="user.userType != 'Admin'" type="text" class="normal" [(ngModel)]="user.lastName"></ng-template>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="firstName">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> firstName </th>
+          <td mat-cell *matCellDef="let user">
+            <ng-container *ngIf="!user.editMode; else editMode">{{user.firstName}}</ng-container>
+            <ng-template #editMode><input *ngIf="user.userType != 'Admin'" type="text" class="normal" [(ngModel)]="user.firstName"></ng-template>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="email">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header><i class="fa-solid fa-envelope"></i></th>
+          <td mat-cell *matCellDef="let user">
+            <ng-container *ngIf="!user.editMode; else editMode">{{user.email}}</ng-container>
+            <ng-template #editMode><input type="text" class="long" [(ngModel)]="user.email"></ng-template>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="birthdate">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header><i class="fa-solid fa-cake-candles"></i></th>
+          <td mat-cell *matCellDef="let user">
+            <ng-container *ngIf="!user.editMode; else editMode">{{user.birthdate | date : 'dd-MM-yyyy'}}</ng-container>
+            <ng-template #editMode><input type="date" class="long"  [(ngModel)]="user.birthdate"></ng-template>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="phoneNumber">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header><i class="fa-solid fa-phone"></i></th>
+          <td mat-cell *matCellDef="let user">
+            <ng-container *ngIf="!user.editMode; else editMode">{{user.phoneNumber}}</ng-container>
+            <ng-template #editMode><input type="text" class="long"  [(ngModel)]="user.phoneNumber"></ng-template>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="gender">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header><i class="fa-solid fa-venus-mars"></i></th>
+          <td mat-cell *matCellDef="let user">
+            <ng-container *ngIf="!user.editMode; else editMode">{{user.gender}}</ng-container>
+            <ng-template #editMode>
+              <select *ngIf="user.userType != 'Admin'" name="gender" class="normal"  [(ngModel)]="user.gender">
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+              </select>
+            </ng-template>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="addressId">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header><i class="fa-solid fa-house"></i></th>
+          <td mat-cell *matCellDef="let user">
+            <ng-container *ngIf="!user.editMode && user.userType != 'Admin'; else editMode">{{user.addressId}}</ng-container>
+            <ng-template #editMode><input *ngIf="user.userType != 'Admin'" type="text" class="short"  [(ngModel)]="user.addressId"></ng-template>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="carPlate">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header><i class="fa-solid fa-car"></i></th>
+          <td mat-cell *matCellDef="let user">
+            <ng-container *ngIf="!user.editMode; else editMode">{{user.carPlate}}</ng-container>
+            <ng-template #editMode>
+              <input *ngIf="user.userType == 'Driver'" type="text" class="normal" [(ngModel)]="user.carPlate">
+            </ng-template>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="isBanned">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header><i class="fa-solid fa-ban"></i></th>
+          <td mat-cell *matCellDef="let user">
+            <ng-container >{{user.isBanned}}</ng-container>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="edit">
+          <th mat-header-cell *matHeaderCellDef><i class="fa-solid fa-pen"></i></th>
+          <td mat-cell *matCellDef="let user">
+            <ng-container *ngIf="!user.editMode; else editMode">
+              <a (click)="enableEditMode(user)">
+                <i class="fa-solid fa-pen"></i>
+              </a>
+            </ng-container>
+            <ng-template #editMode>
+              <a (click)="disableEditMode(user)">
+                <i class="fa-solid fa-check"></i>
+              </a>
+            </ng-template>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="ban">
+          <th mat-header-cell *matHeaderCellDef><i class="fa-solid fa-user-slash"></i></th>
+          <td mat-cell *matCellDef="let user">
+            <a *ngIf="user.isBanned" (click)="unbanUser(user)">
+              <i  class="fa-solid fa-user-slash"></i>
+            </a>
+            <a  *ngIf="!user.isBanned" (click)="banUser(user)">
+              <i class="fa-solid fa-user"></i>
+            </a>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page"></mat-paginator>
+    </div>
+  </div>

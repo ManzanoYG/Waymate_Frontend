@@ -1,0 +1,178 @@
+<section class="gradient-custom-2">
+  <form *ngIf="trip && addressDestination && addressDepart" [formGroup]="form" (submit)="onSubmit()">
+    <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12">
+          <div class="card card-registration card-registration-2" style="border-radius: 15px;">
+            <div class="card-body p-0">
+              <div class="row g-0">
+                <div class="col-lg-6">
+                  <div class="p-5">
+                    <h3 class="fw-normal mb-5" style="color: #4835d4;">Trip Infomation</h3>
+                    <div class="row">
+                      <div class="col-md-6 mb-4 pb-2">
+                        <div class="form-outline">
+                          <span class="form-control-lg">
+                             Date : {{trip.date | date: 'dd/MM/yyyy'}}
+                          </span>
+                        </div>
+                      </div>
+                      <div class="col-md-6 mb-4 pb-2">
+                        <div class="form-outline">
+                          <span class="form-control-lg">
+                             {{addressDepart.country}}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6 mb-4 pb-2">
+                        <div class="form-outline">
+                          <span class="form-control-lg">
+                            <i class="fa-solid fa-location-dot"></i>
+                            {{addressDepart.city}}
+                          </span>
+                        </div>
+                      </div>
+                      <div class="col-md-6 mb-4 pb-2">
+                        <div class="form-outline">
+                          <span class="form-control-lg">
+                            <i class="fa-solid fa-location-dot"></i>
+                            {{addressDestination.city}}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="mb-4 pb-2">
+                      <div class="form-outline">
+                        <span *ngIf="trip.smoke" class="form-control-lg">
+                          <i class="fa-solid fa-smoking"></i>
+                          Passengers on your trip may smoke.
+                        </span>
+                        <span *ngIf="!trip.smoke" class="form-control-lg">
+                          <i class="fa-solid fa-smoking"></i>
+                          Passengers on your trip cannot smoke.
+                        </span>
+                      </div>
+                    </div>
+                    <div class="mb-4 pb-2">
+                      <div class="form-outline">
+                        <span *ngIf="trip.petFriendly" class="form-control-lg">
+                          <i class="fa-solid fa-paw"></i>
+                          Passengers on your trip may have pets.
+                        </span>
+                        <span *ngIf="!trip.petFriendly" class="form-control-lg">
+                          <i class="fa-solid fa-paw"></i>
+                          Passengers on your trip cannot have pets.
+                        </span>
+                      </div>
+                    </div>
+                    <div class="mb-4 pb-2">
+                      <div class="form-outline">
+                        <span *ngIf="trip.luggage" class="form-control-lg">
+                          <i class="fa-solid fa-person-walking-luggage"></i>
+                          Passengers on your trip may have luggage.
+                        </span>
+                        <span *ngIf="!trip.luggage" class="form-control-lg">
+                          <i class="fa-solid fa-person-walking-luggage"></i>
+                          Passengers on your trip cannot have luggage.
+                        </span>
+                      </div>
+                    </div>
+                    <div class="mb-4 pb-2">
+                      <div class="form-outline">
+                        <span *ngIf="trip.airConditioning" class="form-control-lg">
+                          <i class="fa-solid fa-fan"></i>
+                          Your car has air conditioning.
+                        </span>
+                        <span *ngIf="!trip.airConditioning" class="form-control-lg">
+                          <i class="fa-solid fa-fan"></i>
+                          Your car does not have air conditioning.
+                        </span>
+                      </div>
+                    </div>
+                    <div class="mb-4 pb-2">
+                      <div class="form-outline">
+                        <span class="form-control-lg">
+                          <i class="fa-solid fa-message"></i>
+                          {{trip.driverMessage}}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                  <div class="col-lg-6 bg-indigo text-white">
+                    <div class="p-5">
+                      <h3 class="fw-normal mb-5">Modify Details</h3>
+                      <div class="row">
+                        <div class="col-md-1 mb-4 pb-2">
+                          <i class="fa-solid fa-smoking"></i>
+                        </div>
+                        <div class="col-md-4 mb-4 pb-2">
+                          <div class="form-outline form-white">
+                              <select class="form-control" formControlName="smoke">
+                                <option value="true">Yes</option>
+                                <option value="false">No</option>
+                              </select>
+                          </div>
+                        </div>
+                        <div class="col-md-1 mb-4 pb-2">
+                          <i class="fa-solid fa-paw"></i>
+                        </div>
+                        <div class="col-md-4 mb-4 pb-2">
+                          <div class="form-outline form-white">
+                            <select class="form-control" formControlName="petFriendly">
+                              <option value="true">Yes</option>
+                              <option value="false">No</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-1 mb-4 pb-2">
+                          <i class="fa-solid fa-person-walking-luggage"></i>
+                        </div>
+                        <div class="col-md-4 mb-4 pb-2">
+                          <div class="form-outline form-white">
+                            <select class="form-control" formControlName="luggage">
+                              <option value="true">Yes</option>
+                              <option value="false">No</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="col-md-1 mb-4 pb-2">
+                          <i class="fa-solid fa-fan"></i>
+                        </div>
+                        <div class="col-md-4 mb-4 pb-2">
+                          <div class="form-outline form-white">
+                            <select class="form-control" formControlName="airConditioning">
+                              <option value="true">Yes</option>
+                              <option value="false">No</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-12 mb-4 pb-2">
+                          <div class="form-outline form-white">
+                            <textarea class="form-control" formControlName="driverMessage"></textarea>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="d-flex justify-content-center mb-3">
+                        <input class="btn btn-light btn-lg" type="submit" value="Validate" [disabled]="form.invalid">
+                      </div>
+                      <div class="d-flex justify-content-center">
+                        <input class="btn btn-light btn-lg" type="button" value="Previous page" (click)="previousPage()">
+                      </div>
+                    </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</section>
+<router-outlet></router-outlet>

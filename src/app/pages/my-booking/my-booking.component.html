@@ -1,0 +1,41 @@
+<div class="container py-3 h-100">
+  <table *ngIf="filteredBooking.length > 0" class="table table-hover mb-5">
+    <thead>
+    <tr>
+      <th>#</th>
+      <th>Booking date</th>
+      <th>Trip date</th>
+      <th>Country</th>
+      <th>Departure</th>
+      <th>Destination</th>
+      <th>Driver</th>
+      <th>Numberplate</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let trips of filteredBooking; let i = index;">
+      <td>{{i+1}}</td>
+      <td>{{ trips.booking.date | date:'dd/MM/yyyy' }}</td>
+      <td>{{ trips.trip.date | date:'dd/MM/yyyy' }}</td>
+      <td>{{ trips.departureAddress.country }}</td>
+      <td>{{ trips.departureAddress.city }}</td>
+      <td>{{ trips.destinationAddress.city }}</td>
+      <td>{{ trips.driver.firstName}} {{ trips.driver.lastName}}</td>
+      <td>{{ trips.driver.carPlate}}</td>
+    </tr>
+    </tbody>
+  </table>
+  <div *ngIf="filteredBooking.length === 0" class="container py-5 h-100">
+    <div   class="row d-flex justify-content-center align-items-center h-100">
+      <div  class="col-auto">
+        <div class="col-auto">
+          <div class="card card-registration card-registration-2" style="border-radius: 15px;">
+            <div class="p-5">
+              <p>You have not reserved any trips</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

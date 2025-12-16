@@ -1,0 +1,43 @@
+<section class="gradient-custom-2">
+  <form [formGroup]="form" (submit)="verifyLogin(form.value)">
+    <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-auto">
+          <div class="card card-registration card-registration-2" style="border-radius: 15px;">
+            <div class="p-5">
+              <h3 class="fw-normal mb-5" style="color: #4835d4;">Log In</h3>
+              <div class="mb-4 pb-2">
+                <div class="form-outline">
+                  <input class="form-control form-control-lg" type="email" name="email" formControlName="email" placeholder="Your email"/>
+                  <span *ngIf="!controlEmail()" class="invalid">The email address is invalid.</span>
+                </div>
+              </div>
+              <div class="mb-4 pb-2">
+                <div class="form-outline">
+                  <div class="input-group">
+                    <input class="form-control form-control-lg" [type]="fieldTextType ? 'text' : 'password'" name="password" formControlName="password" placeholder="Password"/>
+                    <div class="input-group-append">
+                       <span class="form-control form-control-lg">
+                         <i class="fa" [ngClass]="{'fa-eye-slash': !fieldTextType,'fa-eye': fieldTextType}" (click)="toggleFieldTextType()"></i>
+                       </span>
+                    </div>
+                  </div>
+                  <span *ngIf="errorPassword" class="invalid">You have entered the wrong credentials.</span>
+                </div>
+              </div>
+              <div class="d-flex justify-content-center">
+                <input class="btn btn-light btn-lg" type="submit" value="Log In" [disabled]="form.invalid">
+              </div>
+              <p class="text-center text-muted mt-5 mb-0">You do not have an account ?
+                <a (click)="clickSignUp()" class="fw-bold text-body">
+                  <u>Sign Up here</u>
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</section>
+<router-outlet></router-outlet>

@@ -1,0 +1,168 @@
+<section class="gradient-custom-2">
+  <form [formGroup]="form" (submit)="onSubmit()">
+    <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12">
+          <div class="card card-registration card-registration-2" style="border-radius: 15px;">
+            <div class="card-body p-0">
+              <div class="row g-0">
+                <div class="col-lg-6" formGroupName="trip">
+                  <div class="p-5">
+                    <h2 class="fw-normal mb-5" style="color: #4835d4;">Trip Infomation</h2>
+                    <div class="row">
+                      <div class="col-md-6 mb-4 pb-2">
+                        <div class="form-outline">
+                          <input class="form-control form-control-lg" type="date" name="birthdate"  formControlName="dateTrip" [min]="minDate"/>
+                        </div>
+                      </div>
+                      <div class="col-md-6 mb-4 pb-2">
+                        <div class="form-outline">
+                          <input class="form-control form-control-lg" type="text" name="price" formControlName="price" placeholder="Price"/>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-1 mb-4 pb-2">
+                        <i class="fa-solid fa-smoking"></i>
+                      </div>
+                      <div class="col-md-4 mb-4 pb-2">
+                        <div class="form-outline form-white">
+                          <select class="form-control" formControlName="smoke">
+                            <option value="true">Yes</option>
+                            <option value="false">No</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-md-1 mb-4 pb-2">
+                        <i class="fa-solid fa-paw"></i>
+                      </div>
+                      <div class="col-md-4 mb-4 pb-2">
+                        <div class="form-outline form-white">
+                          <select class="form-control" formControlName="petFriendly">
+                            <option value="true">Yes</option>
+                            <option value="false">No</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-1 mb-4 pb-2">
+                        <i class="fa-solid fa-person-walking-luggage"></i>
+                      </div>
+                      <div class="col-md-4 mb-4 pb-2">
+                        <div class="form-outline form-white">
+                          <select class="form-control" formControlName="luggage">
+                            <option value="true">Yes</option>
+                            <option value="false">No</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-md-1 mb-4 pb-2">
+                        <i class="fa-solid fa-fan"></i>
+                      </div>
+                      <div class="col-md-4 mb-4 pb-2">
+                        <div class="form-outline form-white">
+                          <select class="form-control" formControlName="airConditioning">
+                            <option value="true">Yes</option>
+                            <option value="false">No</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12 mb-4 pb-2">
+                        <div class="form-outline form-white">
+                          <div class="col-md-12 mb-2 pb-2">
+                            <i class="fa-solid fa-message"></i> You can write a message that will be seen by passengers on your trip.
+                          </div>
+                          <textarea class="form-control" formControlName="driverMessage"></textarea>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-6 bg-indigo text-white">
+                  <div class="p-5">
+                    <div formGroupName="addressDepart">
+                      <h2 class="fw-normal mb-5">Address Details</h2>
+                      <div class="row">
+                        <h4 class="fw-normal ">Departure</h4>
+                        <div class="col-md-7 mb-4 pb-2">
+                          <div class="form-outline form-white">
+                            <input class="form-control form-control-lg" type="text" name="street" formControlName="street" placeholder="Street"/>
+                          </div>
+                        </div>
+                        <div class="col-md-5 mb-4 pb-2">
+                          <div class="form-outline form-white">
+                            <input class="form-control form-control-lg" type="text" name="number" formControlName="number" placeholder="Number"/>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-7 mb-4 pb-2">
+                          <div class="form-outline form-white">
+                            <input class="form-control form-control-lg" type="text" name="city" formControlName="city" placeholder="City"/>
+                          </div>
+                        </div>
+                        <div class="col-md-5 mb-4 pb-2">
+                          <div class="form-outline form-white">
+                            <input class="form-control form-control-lg" type="text" name="postalCode" formControlName="postalCode" placeholder="Postal code"/>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-8 mb-4 pb-2">
+                          <div class="form-outline form-white">
+                            <input class="form-control form-control-lg" type="text" name="country" formControlName="country" placeholder="Country"/>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div formGroupName="addressDest">
+                      <div class="row">
+                        <h4 class="fw-normal ">Destination</h4>
+                        <div class="col-md-7 mb-4 pb-2">
+                          <div class="form-outline form-white">
+                            <input class="form-control form-control-lg" type="text" name="street" formControlName="street" placeholder="Street"/>
+                          </div>
+                        </div>
+                        <div class="col-md-5 mb-4 pb-2">
+                          <div class="form-outline form-white">
+                            <input class="form-control form-control-lg" type="text" name="number" formControlName="number" placeholder="Number"/>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-7 mb-4 pb-2">
+                          <div class="form-outline form-white">
+                            <input class="form-control form-control-lg" type="text" name="city" formControlName="city" placeholder="City"/>
+                          </div>
+                        </div>
+                        <div class="col-md-5 mb-4 pb-2">
+                          <div class="form-outline form-white">
+                            <input class="form-control form-control-lg" type="text" name="postalCode" formControlName="postalCode" placeholder="Postal code"/>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-8 mb-4 pb-2">
+                          <div class="form-outline form-white">
+                            <input class="form-control form-control-lg" type="text" name="country" formControlName="country" placeholder="Country"/>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                      <input class="btn btn-light btn-lg" type="submit" value="Validate" [disabled]="form.invalid">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</section>
+<router-outlet></router-outlet>

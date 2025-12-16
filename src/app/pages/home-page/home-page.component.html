@@ -1,0 +1,67 @@
+<div class="container py-5 h-100">
+  <div class="row">
+    <div class="col-md-8">
+      <div class="row d-flex justify-content-center align-items-center">
+        <div class="col-md-8 mb-4 pb-2">
+          <form class="form-frame" [formGroup]="form" (submit)="formSubmit()">
+            <div class="form-group row">
+              <div class="form-group col-md-7">
+                <input class="form-control" type="text" name="destinationHomePage" formControlName="depart" placeholder="◉ Depart"/>
+              </div>
+              <div class="form-group col-md-5">
+                <input class="form-control" type="date" name="destinationHomePage" formControlName="date" [min]="minDate"/>
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="form-group col-md-7">
+                <input class="form-control" type="text" name="destinationHomePage" formControlName="destination" placeholder="◉ Destination"/>
+              </div>
+              <div class="form-group col-md-5">
+                <input class="form-control" type="text" name="destinationHomePage" formControlName="people" placeholder="🚹 People"/>
+              </div>
+            </div>
+            <div class="form-group">
+              <input class="form-control" type="submit" value="See trip" [disabled]="form.invalid"/>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="row d-flex justify-content-center align-items-center">
+        <div class="col-md-8 mb-4 pb-2">
+          <ngb-carousel>
+              <ng-template ngbSlide>
+                <div class="col-md-auto">
+                  <h2>Why choose WayMate?</h2>
+                  <p>At Waymate, we believe in the power of ridesharing to create meaningful connections while reducing our carbon footprint. With our user-friendly platform, you can find reliable travel companions, save money and contribute to a more sustainable future. Choose Waymate for a safe, friendly and eco-friendly rideshare experience.</p>
+                </div>
+              </ng-template>
+            <ng-template ngbSlide>
+              <div class="col-md-auto">
+                <h2>The Waymate Community: Your Trip, Your Community</h2>
+                <p>Explore a new way to travel with the Waymate community. By choosing Waymate, you join a vibrant community of like-minded carpoolers. Save on transportation costs, reduce your carbon footprint, and connect with people who share your interests. Make every ride a social adventure with the Waymate community.</p>
+              </div>
+            </ng-template>
+            <ng-template ngbSlide>
+              <div class="col-md-auto">
+                <h2>Waymate: More Than a Trip, a Human Connection</h2>
+                <p>Much more than a simple carpooling platform, Waymate promotes human connections. Choose Waymate to meet new people, share enriching experiences, and create unique connections while saving on your commute. Make every mile an opportunity to connect with Waymate.</p>
+              </div>
+            </ng-template>
+            <ng-template ngbSlide>
+              <div class="col-md-auto">
+                <h2>Waymate: Your Ideal Travel Companion</h2>
+                <p>Choose Waymate to turn your trips into memorable experiences. Our carpooling platform makes it easy to connect with drivers and passengers sharing your routes, giving you comfortable and friendly trips. Choose Waymate and make every journey a rewarding adventure.</p>
+              </div>
+            </ng-template>
+          </ngb-carousel>
+      </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+        <img [src] ="ImagePath" class="img-fluid" alt="waymate">
+     </div>
+  </div>
+</div>
+<router-outlet></router-outlet>
+
+

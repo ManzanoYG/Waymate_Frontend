@@ -1,0 +1,21 @@
+.mat-column-id {
+  width: 32px;
+  border-right: 1px solid currentColor;
+  padding-right: 24px;
+  text-align: center;
+}
+
+a:hover {
+  cursor:pointer;
+}
+
+input.normal{
+  width: 85px;
+}
+input.long{
+  width: 120px;
+}
+
+input.short{
+  width: 40px;
+}

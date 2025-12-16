@@ -1,0 +1,103 @@
+<div class="row">
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)">
+      <ng-container matColumnDef="numberPlate">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Numberplate</th>
+        <td mat-cell *matCellDef="let car"> {{car.numberPlate}} </td>
+      </ng-container>
+      <ng-container matColumnDef="model">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Model </th>
+        <td mat-cell *matCellDef="let car">
+          <ng-container *ngIf="!car.editMode; else editMode">{{car.model}}</ng-container>
+          <ng-template #editMode><input type="text" class="long" [(ngModel)]="car.model"></ng-template>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="nbSeats">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header><i class="fa-solid fa-chair"></i></th>
+        <td mat-cell *matCellDef="let car">
+          <ng-container *ngIf="!car.editMode; else editMode">{{car.nbSeats}}</ng-container>
+          <ng-template #editMode><input type="text" class="short" [(ngModel)]="car.nbSeats"></ng-template>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="brand">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Brand </th>
+        <td mat-cell *matCellDef="let car">
+          <ng-container *ngIf="!car.editMode; else editMode">{{car.brand}}</ng-container>
+          <ng-template #editMode><input type="text" class="long" [(ngModel)]="car.brand"></ng-template>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="carType">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Car Type </th>
+        <td mat-cell *matCellDef="let car">
+          <ng-container *ngIf="!car.editMode; else editMode">{{car.carType}}</ng-container>
+          <ng-template #editMode>
+            <select name="carType" [ngModel]="0">
+              <option value="0">Micro</option>
+              <option value="1">Sedan</option>
+              <option value="2">Hatchback</option>
+              <option value="3">Universal</option>
+              <option value="4">Liftback</option>
+              <option value="5">Coupe</option>
+              <option value="6">Cabriolet</option>
+              <option value="7">Roadster</option>
+              <option value="8">Targa</option>
+              <option value="9">Limousine</option>
+              <option value="10">MuscleCar</option>
+              <option value="11">SportCar</option>
+              <option value="12">SuperCar</option>
+              <option value="13">Suv</option>
+              <option value="14">Crossover</option>
+              <option value="15">Pickup</option>
+              <option value="16">Van</option>
+              <option value="17">Minivan</option>
+              <option value="18">Minibus</option>
+              <option value="19">Bus</option>
+              <option value="20">Campervan</option>
+            </select>
+          </ng-template>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="fuelType">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header><i class="fa-solid fa-gas-pump"></i></th>
+        <td mat-cell *matCellDef="let car">
+          <ng-container *ngIf="!car.editMode; else editMode">{{car.fuelType}}</ng-container>
+          <ng-template #editMode>
+            <select name="fuelType" [ngModel]="0">
+              <option value="0">Electric</option>
+              <option value="1">Diesel</option>
+              <option value="2">Gasoline</option>
+              <option value="3">Hybrid</option>
+              <option value="4">Lpg</option>
+              <option value="5">Other</option>
+            </select>
+            </ng-template>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="color">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header><i class="fa-solid fa-palette"></i></th>
+        <td mat-cell *matCellDef="let car">
+          <ng-container *ngIf="!car.editMode; else editMode">{{car.color}}</ng-container>
+          <ng-template #editMode><input type="text" class="short" [(ngModel)]="car.color"></ng-template>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="edit">
+        <th mat-header-cell *matHeaderCellDef><i class="fa-solid fa-pen"></i></th>
+        <td mat-cell *matCellDef="let car">
+          <ng-container *ngIf="!car.editMode; else editMode">
+            <a (click)="enableEditMode(car)">
+              <i class="fa-solid fa-pen"></i>
+            </a>
+          </ng-container>
+          <ng-template #editMode>
+            <a (click)="disableEditMode(car)">
+              <i class="fa-solid fa-check"></i>
+            </a>
+          </ng-template>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page"></mat-paginator>
+  </div>
+</div>
