@@ -12,6 +12,7 @@ WayMate is a carpooling platform that connects drivers and passengers.
 - C# / ASP.NET
 - Angular
 - SQL Server
+- Cypress
 - Docker
 
 ## 🎯 Objective
